@@ -1,5 +1,5 @@
 import styled, {ThemeProvider} from "styled-components";
-import { GlobalStyles,Routers,Sidebar,Login, AuthContextProvider, useThemeStore } from "./index"
+import { GlobalStyles,Routers,Sidebar,Login, useThemeStore } from "./index"
 import { Device } from "./styles/breakpoints"
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -10,20 +10,18 @@ function App() {
   const {pathname} = useLocation();
   return (
   <ThemeProvider theme={themeStyle}>
-    <AuthContextProvider>
-      {
-        pathname != "/login" ?(<Container className={sidebarOpen ? "active" : ""}>
-      <GlobalStyles />
-      <section className="contentSidebar">
-        <Sidebar state={sidebarOpen} setState={()=>setSidebarOpen(!sidebarOpen)}/>
-      </section>
-      <section className="contentRouters">
-        <Routers/>
-      </section>
-      <section className="contentMenu">Menu</section>
-    </Container>):(<Login />)
-      }
-    </AuthContextProvider>
+    {
+      pathname != "/login" ?(<Container className={sidebarOpen ? "active" : ""}>
+    <GlobalStyles />
+    <section className="contentSidebar">
+      <Sidebar state={sidebarOpen} setState={()=>setSidebarOpen(!sidebarOpen)}/>
+    </section>
+    <section className="contentRouters">
+      <Routers/>
+    </section>
+    <section className="contentMenu">Menu</section>
+  </Container>):(<Login />)
+    }
   </ThemeProvider>    
   )
 }

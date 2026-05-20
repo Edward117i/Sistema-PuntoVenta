@@ -1,7 +1,5 @@
 import { createContext, useEffect, useContext, useState, ReactNode } from "react";
-import { supabase } from "../supabase/supabase.config";
-import { MostrarUsuarios } from "../supabase/crudUsuarios";
-import { InsertarEmpresa } from "../supabase/crudEmpresa";
+import { supabase,InsertarAdmin, MostrarUsuarios, InsertarEmpresa, MostrarTipoDocumentos } from "../index";
 
 // 1. Definimos la forma del contexto
 interface AuthContextType {
@@ -49,7 +47,10 @@ const insertarDatos = async (id_auth:string)=>{
     
   }
   else{
-    await InsertarEmpresa({nombre:"Generica"})
+    const responseEmpresa = await InsertarEmpresa({id_auth:id_auth})
+    await MostrarTipoDocumentos({id_empresa:responseEmpresa.id})
+    console.log("empresa",responseEmpresa)
+      await InsertarAdmin({id_auth:id_auth}) 
   }
 }
 
