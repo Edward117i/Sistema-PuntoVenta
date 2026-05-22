@@ -34,17 +34,18 @@ export const Light = {
   sizeoficon: "1.4em",
   colorSubtitle: "#2c2c2c",
   colorScroll: "#cac9ca",
-  bgcards: "#ffffff",
-  colortitlecard: "#363637",
-  colorsubtitlecard: "#080808",
+  bgcards: "#f8f8f8",
+  colortitlecard: "#555555",
+  colorsubtitlecard: "#111111",
   color1: "#1cb0f6",
-  color2:"#E5E5E5"
+  color2:"#E5E5E5",
+  bgtotal: "#EDF3FB",
 };
 export const Dark = {
   colortitlecard: "#8C9298",
   colorsubtitlecard: "#F0F0F0",
   bgcards: "#171717",
-  rgbafondoanimado: "rgba(198, 198, 198, 0.2)",
+  rgbafondoanimado: "rgba(144, 131, 131, 0.2)",
   bgtgderecha: "#21252B",
   body: "#202020",
   text: "#fff",

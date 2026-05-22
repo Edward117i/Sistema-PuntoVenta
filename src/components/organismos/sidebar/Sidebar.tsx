@@ -8,14 +8,11 @@ import { v } from "../../../styles/variables";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
-
 interface SidebarProps {
   $isopen: string;
 }
 
 export function Sidebar({ state, setState }: { state: boolean; setState: (val: boolean) => void }) {
-
- 
   return (
     <Main $isopen={state.toString()}>
       <span className="Sidebarbutton" onClick={() => setState(!state)}>
@@ -76,29 +73,27 @@ export function Sidebar({ state, setState }: { state: boolean; setState: (val: b
               <span className={state ? "label_ver" : "label_oculto"}>MÁS</span>
             </section>
           </div>
-         
-         
         </div>
-
         <ToggleTema />
       </Container>
     </Main>
   );
 }
-const Container = styled.div<SidebarProps>`
 
+const Container = styled.div<SidebarProps>`
   background: ${({ theme }) => theme.bgtotal};
   color: ${(props) => props.theme.text};
-  position: fixed;
+  position: sticky;
+  top: 0;
   padding-top: 20px;
   z-index: 2;
-  height: 100%;
+  height: 100vh;
   width: 88px;
   transition: 0.1s ease-in-out;
   overflow-y: auto;
   overflow-x: hidden;
   border-right: 2px solid ${({ theme }) => theme.color2};
-  
+
   &::-webkit-scrollbar {
     width: 6px;
     border-radius: 10px;
@@ -111,6 +106,7 @@ const Container = styled.div<SidebarProps>`
   &.active {
     width: 260px;
   }
+
   .Logocontent {
     display: flex;
     justify-content: center;
@@ -136,10 +132,11 @@ const Container = styled.div<SidebarProps>`
       display: ${({ $isopen }) => ($isopen === "true" ? `block` : `none`)};
     }
   }
+
   .LinkContainer {
     margin: 9px 0;
-    margin-right:10px;
-    margin-left:8px;
+    margin-right: 10px;
+    margin-left: 8px;
     transition: all 0.3s ease-in-out;
     position: relative;
     text-transform: uppercase;
@@ -155,15 +152,16 @@ const Container = styled.div<SidebarProps>`
     color: ${(props) => props.theme.text};
     height: 60px;
     position: relative;
+
     .content {
       display: flex;
       justify-content: center;
       width: 100%;
       align-items: center;
+
       .Linkicon {
         display: flex;
         font-size: 33px;
-
         svg {
           font-size: 25px;
         }
@@ -198,7 +196,10 @@ const Container = styled.div<SidebarProps>`
     }
   }
 `;
+
 const Main = styled.div<SidebarProps>`
+  height: 100vh;        // ← agrega
+  position: relative;   // ← agrega
 
   .Sidebarbutton {
     position: fixed;
@@ -221,6 +222,7 @@ const Main = styled.div<SidebarProps>`
     color: ${(props) => props.theme.text};
   }
 `;
+
 const Divider = styled.div`
   height: 1px;
   width: 100%;
