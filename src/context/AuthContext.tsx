@@ -107,11 +107,11 @@ const insertarDatos = async (id_auth: string, correo: string) => {
     id_roll: responseRol.id,
     correo: correo,
     fecharegistro: new Date().toISOString().split('T')[0],
-    id_auth: id_auth,
+    id_auth: id_auth
   };
   console.log("👨‍💼 Datos del usuario:", pUser);
-  await InsertarAdmin(pUser);
-  console.log("✅ Usuario administrador creado");
+  const responseUsuario = await InsertarAdmin(pUser);
+  console.log("✅ Usuario administrador creado:", responseUsuario);
 };
 
   return (
