@@ -1,5 +1,3 @@
-export * from './App';
-export * from './main';
 export * from './context/AuthContext';
 export * from './hooks/ProtectedRoute';
 export * from './routers/routers';

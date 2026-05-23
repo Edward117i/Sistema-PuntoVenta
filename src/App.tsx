@@ -1,6 +1,9 @@
-import styled, { ThemeProvider } from "styled-components";
-import { GlobalStyles, Routers, Sidebar, Login, useThemeStore } from "./index"
-import { Device } from "./styles/breakpoints"
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./styles/GlobalStyles";
+import { Routers } from "./routers/routers";
+import { Sidebar } from "./components/organismos/sidebar/Sidebar";
+import { Login } from "./pages/Login";
+import { useThemeStore } from "./store/ThemeStore";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -12,70 +15,33 @@ function App() {
     <ThemeProvider theme={themeStyle}>
       {
         pathname != "/login" ? (
-          <Container className={sidebarOpen ? "active" : ""}>
+          <div style={{
+            display: "grid",
+            minHeight: "100vh",
+            gridTemplateColumns: sidebarOpen ? "260px 1fr" : "88px 1fr",
+            gridTemplateRows: "1fr",
+            gridTemplateAreas: '"sidebar routers"',
+            transition: "grid-template-columns 0.3s ease-in-out"
+          }}>
             <GlobalStyles />
-            <section className="contentSidebar">
+            <section style={{
+              gridArea: "sidebar",
+              width: sidebarOpen ? "260px" : "88px",
+              maxWidth: sidebarOpen ? "260px" : "88px",
+              transition: "width 0.3s ease-in-out",
+              overflow: "hidden",
+              height: "100vh"
+            }}>
               <Sidebar state={sidebarOpen} setState={setSidebarOpen} />
             </section>
-            <section className="contentRouters">
+            <section style={{gridArea: "routers", overflow: "auto"}}>
               <Routers />
             </section>
-            <section className="contentMenu">Menu</section>
-          </Container>
+          </div>
         ) : (<Login />)
       }
     </ThemeProvider>
   )
 }
-
-const Container = styled.main`
-  display: grid;
-  min-height: 100vh;
-
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 60px;
-  grid-template-areas:
-    "routers"
-    "menu";
-
-  .contentSidebar {
-    display: none;
-  }
-  .contentMenu {
-    grid-area: menu;
-  }
-  .contentRouters {
-    grid-area: routers;
-    overflow: auto;
-  }
-
-  @media ${Device.tablet} {
-    grid-template-columns: 88px 1fr;
-    &.active {
-      grid-template-columns: 260px 1fr;
-    }
-    grid-template-rows: 1fr;
-    grid-template-areas: "sidebar routers";
-
-    .contentSidebar {
-      display: block;
-      grid-area: sidebar;
-    }
-    .contentMenu {
-      display: none;
-    }
-    .contentRouters {
-      grid-area: routers;
-    }
-  }
-
-  @media ${Device.laptop} {
-    grid-template-columns: 88px 1fr;
-    &.active {
-      grid-template-columns: 260px 1fr;
-    }
-    grid-template-areas: "sidebar routers";
-  }
-`
 
 export default App

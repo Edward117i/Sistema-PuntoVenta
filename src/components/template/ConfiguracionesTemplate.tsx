@@ -54,19 +54,21 @@ export function ConfiguracionesTemplate() {
 const CardsGrid = styled.div`
   display: flex !important;
   flex-wrap: wrap !important;
-  gap: 16px;
+  gap: 5px;
   max-width: 1000px;
-  width: 100%;
+  width: 70%;
   justify-content: center;
+  align-items: flex-start;  // ← agrega esto
+  padding-top: 36px;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
+  border-radius: 15px;
   cursor: pointer;
   display: flex;
-  height: 260px;
+  height: 235px;
   flex-direction: column;
   position: relative;
   flex: 1 1 calc(50% - 8px);
@@ -119,7 +121,7 @@ const StyledLink = styled(Link)`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    inset: 1px;
+    inset: 3px;
     padding: 10px;
     position: absolute;
     z-index: 2;
@@ -198,6 +200,5 @@ const Container = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  padding: 40px 20px;
-  padding: 40px 20px;
+  padding: 40px 20px 40px 20px;  
 `;

@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import {
   LinksArray,
   SecondarylinksArray,
@@ -7,225 +6,151 @@ import {
 import { v } from "../../../styles/variables";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
-
-interface SidebarProps {
-  $isopen: string;
-}
+import { useThemeStore } from "../../../store/ThemeStore";
 
 export function Sidebar({ state, setState }: { state: boolean; setState: (val: boolean) => void }) {
+  const { themeStyle } = useThemeStore()
+
   return (
-    <Main $isopen={state.toString()}>
-      <span className="Sidebarbutton" onClick={() => setState(!state)}>
-        {<v.iconoflechaderecha />}
+    <div style={{
+      width: "100%",
+      height: "100vh",
+      overflow: "hidden",
+      paddingTop: "20px",
+      borderRight: `2px solid ${themeStyle.color2}`,
+      position: "relative",
+      backgroundColor: themeStyle.bgtotal,
+      color: themeStyle.text,
+    }}>
+      <span
+        onClick={() => setState(!state)}
+        style={{
+          position: "fixed",
+          top: "70px",
+          left: state ? "241px" : "68px",
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          background: themeStyle.bgtgderecha,
+          boxShadow: `0 0 4px ${themeStyle.bg3}, 0 0 7px ${themeStyle.bg}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          transition: "left 0.3s ease-in-out",
+          zIndex: 3,
+          transform: state ? "rotate(3.142rad)" : "initial",
+          color: themeStyle.text,
+        }}
+      >
+        <v.iconoflechaderecha />
       </span>
-      <Container $isopen={state.toString()} className={state ? "active" : ""}>
-        <div className="Logocontent">
-          <div className="imgcontent">
-            <img src={v.logo} />
-          </div>
-          <h2>Sistema PoS</h2>
+
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingBottom: "60px",
+      }}>
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "30px",
+          cursor: "pointer",
+          transform: state ? "scale(0.7)" : "scale(1.5)",
+          transition: "0.3s ease",
+        }}>
+          <img src={v.logo} style={{width: "100%"}} />
         </div>
-        {LinksArray.map(({ icon, label, to }) => (
-          <div
-            className={state ? "LinkContainer active" : "LinkContainer"}
-            key={label}
+        {state && <h2 style={{color: "#f88533", margin: "0 0 0 10px"}}>Sistema PoS</h2>}
+      </div>
+
+      {LinksArray.map(({ icon, label, to }) => (
+        <div style={{margin: "9px 8px 9px 8px"}} key={label}>
+          <NavLink
+            to={to}
+            style={({ isActive }) => ({
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              height: "60px",
+              background: isActive ? themeStyle.bg6 : "transparent",
+              border: isActive ? `2px solid ${themeStyle.bg5}` : "2px solid transparent",
+              color: isActive ? themeStyle.color1 : themeStyle.text,
+            })}
           >
-            <NavLink
-              to={to}
-              className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
-            >
-              <section className={state ? "content open" : "content"}>
-                <Icon className="Linkicon" icon={icon} />
-                <span className={state ? "label_ver" : "label_oculto"}>
-                  {label}
-                </span>
-              </section>
-            </NavLink>
-          </div>
-        ))}
-        <Divider />
-        {SecondarylinksArray.map(({ icon, label, to, color }) => (
-          <div
-            className={state ? "LinkContainer active" : "LinkContainer"}
-            key={label}
+            <div style={{
+              display: "flex",
+              justifyContent: state ? "flex-start" : "center",
+              alignItems: "center",
+              width: "100%",
+              gap: state ? "20px" : "0",
+              padding: state ? "0 20px" : "0",
+            }}>
+              <Icon style={{fontSize: "33px"}} icon={icon} />
+              {state && <span style={{fontWeight: 700, textTransform: "uppercase"}}>{label}</span>}
+            </div>
+          </NavLink>
+        </div>
+      ))}
+
+      <div style={{height: "1px", background: themeStyle.bg4, margin: "24px 0"}} />
+
+      {SecondarylinksArray.map(({ icon, label, to, color }) => (
+        <div style={{margin: "9px 8px 9px 8px"}} key={label}>
+          <NavLink
+            to={to}
+            style={({ isActive }) => ({
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              height: "60px",
+              background: isActive ? themeStyle.bg6 : "transparent",
+              border: isActive ? `2px solid ${themeStyle.bg5}` : "2px solid transparent",
+              color: isActive ? themeStyle.color1 : themeStyle.text,
+            })}
           >
-            <NavLink
-              to={to}
-              className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
-            >
-              <section className={state ? "content open" : "content"}>
-                <Icon color={color} className="Linkicon" icon={icon} />
-                <span className={state ? "label_ver" : "label_oculto"}>
-                  {label}
-                </span>
-              </section>
-            </NavLink>
-          </div>
-        ))}
-        <div className={state ? "LinkContainer active" : "LinkContainer"}>
-          <div className="Links">
-            <section className={state ? "content open" : "content"}>
-              <Icon
-                color="#CE82FF"
-                className="Linkicon"
-                icon="heroicons:ellipsis-horizontal-circle-solid"
-              />
-              <span className={state ? "label_ver" : "label_oculto"}>MÁS</span>
-            </section>
+            <div style={{
+              display: "flex",
+              justifyContent: state ? "flex-start" : "center",
+              alignItems: "center",
+              width: "100%",
+              gap: state ? "20px" : "0",
+              padding: state ? "0 20px" : "0",
+            }}>
+              <Icon color={color} style={{fontSize: "33px"}} icon={icon} />
+              {state && <span style={{fontWeight: 700, textTransform: "uppercase"}}>{label}</span>}
+            </div>
+          </NavLink>
+        </div>
+      ))}
+
+      <div style={{margin: "9px 8px 9px 8px"}}>
+        <div style={{
+          borderRadius: "12px",
+          display: "flex",
+          alignItems: "center",
+          height: "60px",
+          cursor: "pointer",
+        }}>
+          <div style={{
+            display: "flex",
+            justifyContent: state ? "flex-start" : "center",
+            alignItems: "center",
+            width: "100%",
+            gap: state ? "20px" : "0",
+            padding: state ? "0 20px" : "0",
+          }}>
+            <Icon color="#CE82FF" style={{fontSize: "33px"}} icon="heroicons:ellipsis-horizontal-circle-solid" />
+            {state && <span style={{fontWeight: 700, textTransform: "uppercase", color: themeStyle.text}}>MÁS</span>}
           </div>
         </div>
-        <ToggleTema />
-      </Container>
-    </Main>
+      </div>
+
+      <ToggleTema />
+    </div>
   );
 }
-
-const Container = styled.div<SidebarProps>`
-  background: ${({ theme }) => theme.bgtotal};
-  color: ${(props) => props.theme.text};
-  position: sticky;
-  top: 0;
-  padding-top: 20px;
-  z-index: 2;
-  height: 100vh;
-  width: 88px;
-  transition: 0.1s ease-in-out;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border-right: 2px solid ${({ theme }) => theme.color2};
-
-  &::-webkit-scrollbar {
-    width: 6px;
-    border-radius: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colorScroll};
-    border-radius: 10px;
-  }
-
-  &.active {
-    width: 260px;
-  }
-
-  .Logocontent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 60px;
-    .imgcontent {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 30px;
-      cursor: pointer;
-      transition: 0.3s ease;
-      transform: ${({ $isopen }) =>
-          $isopen === "true" ? `scale(0.7)` : `scale(1.5)`}
-        rotate(${({ theme }) => theme.logorotate});
-      img {
-        width: 100%;
-        animation: flotar 1.7s ease-in-out infinite alternate;
-      }
-    }
-    h2 {
-      color: #f88533;
-      display: ${({ $isopen }) => ($isopen === "true" ? `block` : `none`)};
-    }
-  }
-
-  .LinkContainer {
-    margin: 9px 0;
-    margin-right: 10px;
-    margin-left: 8px;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    text-transform: uppercase;
-    font-weight: 700;
-  }
-
-  .Links {
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    width: 100%;
-    color: ${(props) => props.theme.text};
-    height: 60px;
-    position: relative;
-
-    .content {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      align-items: center;
-
-      .Linkicon {
-        display: flex;
-        font-size: 33px;
-        svg {
-          font-size: 25px;
-        }
-      }
-
-      .label_ver {
-        transition: 0.3s ease-in-out;
-        opacity: 1;
-        display: initial;
-      }
-      .label_oculto {
-        opacity: 0;
-        display: none;
-      }
-
-      &.open {
-        justify-content: start;
-        gap: 20px;
-        padding: 20px;
-      }
-    }
-
-    &:hover {
-      background: ${(props) => props.theme.bgAlpha};
-    }
-
-    &.active {
-      background: ${(props) => props.theme.bg6};
-      border: 2px solid ${(props) => props.theme.bg5};
-      color: ${(props) => props.theme.color1};
-      font-weight: 600;
-    }
-  }
-`;
-
-const Main = styled.div<SidebarProps>`
-  height: 100vh;        // ← agrega
-  position: relative;   // ← agrega
-
-  .Sidebarbutton {
-    position: fixed;
-    top: 70px;
-    left: 68px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: ${(props) => props.theme.bgtgderecha};
-    box-shadow: 0 0 4px ${(props) => props.theme.bg3},
-      0 0 7px ${(props) => props.theme.bg};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    z-index: 3;
-    transform: ${({ $isopen }) =>
-      $isopen === "true" ? `translateX(173px) rotate(3.142rad)` : `initial`};
-    color: ${(props) => props.theme.text};
-  }
-`;
-
-const Divider = styled.div`
-  height: 1px;
-  width: 100%;
-  background: ${(props) => props.theme.bg4};
-  margin: ${() => v.lgSpacing} 0;
-`;
