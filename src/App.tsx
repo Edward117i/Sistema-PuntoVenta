@@ -6,6 +6,10 @@ import { Login } from "./pages/Login";
 import { useThemeStore } from "./store/ThemeStore";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const SIDEBAR_WIDTH_OPEN = "260px";
+const SIDEBAR_WIDTH_CLOSED = "88px";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -18,7 +22,9 @@ function App() {
           <div style={{
             display: "grid",
             minHeight: "100vh",
-            gridTemplateColumns: sidebarOpen ? "260px 1fr" : "88px 1fr",
+            gridTemplateColumns: sidebarOpen 
+              ? `${SIDEBAR_WIDTH_OPEN} 1fr` 
+              : `${SIDEBAR_WIDTH_CLOSED} 1fr`,
             gridTemplateRows: "1fr",
             gridTemplateAreas: '"sidebar routers"',
             transition: "grid-template-columns 0.3s ease-in-out"
@@ -26,8 +32,8 @@ function App() {
             <GlobalStyles />
             <section style={{
               gridArea: "sidebar",
-              width: sidebarOpen ? "260px" : "88px",
-              maxWidth: sidebarOpen ? "260px" : "88px",
+              width: sidebarOpen ? SIDEBAR_WIDTH_OPEN : SIDEBAR_WIDTH_CLOSED,
+              maxWidth: sidebarOpen ? SIDEBAR_WIDTH_OPEN : SIDEBAR_WIDTH_CLOSED,
               transition: "width 0.3s ease-in-out",
               overflow: "hidden",
               height: "100vh"
@@ -40,6 +46,7 @@ function App() {
           </div>
         ) : (<Login />)
       }
+      <ReactQueryDevtools initialIsOpen={true} />
     </ThemeProvider>
   )
 }

@@ -44,7 +44,6 @@ export function LoginTemplate() {
               icono={<v.iconogoogle/>}
             />
           </div>
-
         </div>
       </section>
       <Footer/>
