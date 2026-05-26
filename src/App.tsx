@@ -22,19 +22,17 @@ function App() {
           <div style={{
             display: "grid",
             minHeight: "100vh",
-            gridTemplateColumns: sidebarOpen 
-              ? `${SIDEBAR_WIDTH_OPEN} 1fr` 
-              : `${SIDEBAR_WIDTH_CLOSED} 1fr`,
+            gridTemplateColumns: "auto 1fr",
             gridTemplateRows: "1fr",
             gridTemplateAreas: '"sidebar routers"',
-            transition: "grid-template-columns 0.3s ease-in-out"
           }}>
             <GlobalStyles />
             <section style={{
               gridArea: "sidebar",
               width: sidebarOpen ? SIDEBAR_WIDTH_OPEN : SIDEBAR_WIDTH_CLOSED,
+              minWidth: sidebarOpen ? SIDEBAR_WIDTH_OPEN : SIDEBAR_WIDTH_CLOSED,
               maxWidth: sidebarOpen ? SIDEBAR_WIDTH_OPEN : SIDEBAR_WIDTH_CLOSED,
-              transition: "width 0.3s ease-in-out",
+              transition: "width 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
               overflow: "hidden",
               height: "100vh"
             }}>

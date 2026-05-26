@@ -37,7 +37,7 @@ export function Sidebar({ state, setState }: { state: boolean; setState: (val: b
           alignItems: "center",
           justifyContent: "center",
           cursor: "pointer",
-          transition: "left 0.3s ease-in-out",
+          transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           zIndex: 3,
           transform: state ? "rotate(3.142rad)" : "initial",
           color: themeStyle.text,
@@ -59,11 +59,21 @@ export function Sidebar({ state, setState }: { state: boolean; setState: (val: b
           width: "30px",
           cursor: "pointer",
           transform: state ? "scale(0.7)" : "scale(1.5)",
-          transition: "0.3s ease",
+          transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}>
           <img src={v.logo} style={{width: "100%"}} />
         </div>
-        {state && <h2 style={{color: "#f88533", margin: "0 0 0 10px"}}>Sistema PoS</h2>}
+        <h2 style={{
+          color: "#f88533",
+          margin: state ? "0 0 0 10px" : "0",
+          opacity: state ? 1 : 0,
+          transition: "opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          maxWidth: state ? "200px" : "0px",
+        }}>
+          Sistema PoS
+        </h2>
       </div>
 
       {LinksArray.map(({ icon, label, to }) => (
@@ -83,14 +93,25 @@ export function Sidebar({ state, setState }: { state: boolean; setState: (val: b
           >
             <div style={{
               display: "flex",
-              justifyContent: state ? "flex-start" : "center",
+              justifyContent: "flex-start",
               alignItems: "center",
               width: "100%",
-              gap: state ? "20px" : "0",
-              padding: state ? "0 20px" : "0",
+              gap: state ? "20px" : "0px",
+              padding: "0 20px",
+              transition: "gap 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
             }}>
               <Icon style={{fontSize: "33px"}} icon={icon} />
-              {state && <span style={{fontWeight: 700, textTransform: "uppercase"}}>{label}</span>}
+              <span style={{
+                fontWeight: 700,
+                textTransform: "uppercase",
+                opacity: state ? 1 : 0,
+                transition: "opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                maxWidth: state ? "200px" : "0px",
+              }}>
+                {label}
+              </span>
             </div>
           </NavLink>
         </div>
@@ -115,14 +136,25 @@ export function Sidebar({ state, setState }: { state: boolean; setState: (val: b
           >
             <div style={{
               display: "flex",
-              justifyContent: state ? "flex-start" : "center",
+              justifyContent: "flex-start",
               alignItems: "center",
               width: "100%",
-              gap: state ? "20px" : "0",
-              padding: state ? "0 20px" : "0",
+              gap: state ? "20px" : "0px",
+              padding: "0 20px",
+              transition: "gap 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
             }}>
               <Icon color={color} style={{fontSize: "33px"}} icon={icon} />
-              {state && <span style={{fontWeight: 700, textTransform: "uppercase"}}>{label}</span>}
+              <span style={{
+                fontWeight: 700,
+                textTransform: "uppercase",
+                opacity: state ? 1 : 0,
+                transition: "opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                maxWidth: state ? "200px" : "0px",
+              }}>
+                {label}
+              </span>
             </div>
           </NavLink>
         </div>
@@ -138,14 +170,26 @@ export function Sidebar({ state, setState }: { state: boolean; setState: (val: b
         }}>
           <div style={{
             display: "flex",
-            justifyContent: state ? "flex-start" : "center",
+            justifyContent: "flex-start",
             alignItems: "center",
             width: "100%",
-            gap: state ? "20px" : "0",
-            padding: state ? "0 20px" : "0",
+            gap: state ? "20px" : "0px",
+            padding: "0 20px",
+            transition: "gap 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           }}>
             <Icon color="#CE82FF" style={{fontSize: "33px"}} icon="heroicons:ellipsis-horizontal-circle-solid" />
-            {state && <span style={{fontWeight: 700, textTransform: "uppercase", color: themeStyle.text}}>MÁS</span>}
+            <span style={{
+              fontWeight: 700,
+              textTransform: "uppercase",
+              color: themeStyle.text,
+              opacity: state ? 1 : 0,
+              transition: "opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              maxWidth: state ? "200px" : "0px",
+            }}>
+              MÁS
+            </span>
           </div>
         </div>
       </div>

@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import fondocuadros from "../../assets/fondocuadros.svg";
 import { Link } from "react-router-dom";
-import { DataModulosConfiguracion } from "../../utils/dataEstatica";
 import { useEffect } from "react";
+import { useModuloStore } from "../../index";
 
 export function ConfiguracionesTemplate() {
+  const {dataModulos} = useModuloStore();
+  console.log(dataModulos)
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       document.querySelectorAll(".card").forEach((card) => {
@@ -29,7 +31,7 @@ export function ConfiguracionesTemplate() {
   return (
     <Container>
       <CardsGrid id="cards">
-        {DataModulosConfiguracion.map((item: any, index: number) => (
+        {dataModulos.map((item: any, index: number) => (
           <StyledLink to={item.link} className="card" key={index}>
             <div className="card-content">
               <div className="card-image">
@@ -38,8 +40,8 @@ export function ConfiguracionesTemplate() {
               <div className="card-info-wrapper">
                 <div className="card-info">
                   <div className="card-info-title">
-                    <h3>{item.title}</h3>
-                    <h4>{item.subtitle}</h4>
+                    <h3>{item.nombre}</h3>
+                    <h4>{item.descripcion}</h4>
                   </div>
                 </div>
               </div>
