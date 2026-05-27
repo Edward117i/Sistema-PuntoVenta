@@ -4,7 +4,7 @@ export function ToggleTema() {
   const { setTheme } = useThemeStore();
 
   return (
-    <Container>
+    <ToggleTemaContainer>
       <div className="container">
         <label className="toggle">
           <input
@@ -100,6 +100,8 @@ export function ToggleTema() {
           <div className="w-8 icon icon--sun">
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
               viewBox="0 0 47.5 47.5"
               id="sun"
             >
@@ -115,12 +117,13 @@ export function ToggleTema() {
           </div>
         </label>
       </div>
-    </Container>
+    </ToggleTemaContainer>
   );
 }
-const Container = styled.div`
-justify-content:center;
-display:flex;
+const ToggleTemaContainer = styled.div`
+  justify-content: center;
+  display: flex;
+  
   .toggle {
     width: 46px;
     height: 46px;
@@ -128,21 +131,23 @@ display:flex;
     display: grid;
     place-items: center;
     cursor: pointer;
-   
     line-height: 1;
-   
     margin-top: 15px;
-  
   }
 
   .input {
-    display: none;
+    display: none !important;
   }
 
   .icon {
     grid-column: 1 / 1;
     grid-row: 1 / 1;
     transition: transform 500ms;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .icon--moon {
@@ -163,6 +168,7 @@ display:flex;
   }
 
   .w-8 {
-    width: 2rem /* 32px */;
+    width: 30px;
+    height: 30px;
   }
 `;

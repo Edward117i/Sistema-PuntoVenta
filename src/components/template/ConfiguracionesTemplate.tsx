@@ -29,7 +29,7 @@ export function ConfiguracionesTemplate() {
   }, []);
 
   return (
-    <Container>
+    <ConfiguracionesContainer>
       <CardsGrid id="cards">
         {dataModulos.map((item: any, index: number) => (
           <StyledLink to={item.link} className="card" key={index}>
@@ -49,7 +49,7 @@ export function ConfiguracionesTemplate() {
           </StyledLink>
         ))}
       </CardsGrid>
-    </Container>
+    </ConfiguracionesContainer>
   );
 }
 
@@ -191,7 +191,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Container = styled.div`
+const ConfiguracionesContainer = styled.div`
   background-image: url(${fondocuadros});
   background-size: contain;
   background-position: center;
