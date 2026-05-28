@@ -25,7 +25,7 @@ const Container = styled.div`
   grid-template:
     "area1" 60px
     "area2" 60px
-    "main" auto;
+    "main" 650px;
 
   .area1 {
     grid-area: area1;
@@ -39,6 +39,9 @@ const Container = styled.div`
   .area2{
     grid-area: area2;
     background-color: rgba(93, 234, 241, 0.14);
+    display: flex;
+    justify-content: end;
+    align-items: center;
 
   }
 

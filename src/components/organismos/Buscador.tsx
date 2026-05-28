@@ -1,12 +1,15 @@
 import styled, { ThemeConsumer } from "styled-components";
 import {v} from "../../styles/variables"
 
-export function Buscador() {
+export function Buscador({setBuscador}:any) {
+    function buscar(e:any){
+        setBuscador(e.target.value);
+    }
     return (
         <Container>
             <section className="content">
                 <v.iconobuscar/>
-               <input placeholder="....Buscar"/> 
+               <input placeholder="....Buscar" onChange={buscar}/> 
             </section>
 
         </Container>
@@ -32,7 +35,7 @@ const Container = styled.div`
         .icono{
             font-size: 18px;
         }
-        .input{
+        input{
             font-size: 18px;
             width: 100%;
             outline: none;
