@@ -39,7 +39,6 @@ export const Light = {
   colorsubtitlecard: "#111111",
   color1: "#1cb0f6",
   color2:"#E5E5E5",
-  bgtotal: "#EDF3FB",
 };
 export const Dark = {
   colortitlecard: "#8C9298",

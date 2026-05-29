@@ -4,6 +4,7 @@ import { UserAuth } from '../context/AuthContext'
 
 export function Routers() {
   const {user}= UserAuth()
+  
   return (
     <Routes>
       <Route element={<ProtectedRoute user={user} redirectTo='/login'/>}>

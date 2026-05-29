@@ -32,3 +32,16 @@ export async function InsertarEmpresa(p: any = {}, _f?: File | null){
         return;
     }
 }
+
+export async function MostrarEmpresaXidusuario(){
+    const {data, error} = await supabase.rpc("mostrarempresaxiduser").maybeSingle()
+    if (error){
+        Swal.fire({
+            icon: "error",
+            title: "Error al mostrar la empresa",
+            text: error.message,
+        })
+        return;
+    }
+    return data;
+}
