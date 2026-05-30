@@ -1,11 +1,13 @@
 import { create } from "zustand";
-import { InsertarEmpresa } from "../supabase/crudEmpresa";
+import { InsertarEmpresa, MostrarEmpresaXidauth, MostrarEmpresaXidusuario } from "../supabase/crudEmpresa";
 
-interface EmpresaState {
-    insertarEmpresa: (p: any, f: File | null) => Promise<boolean>;
-}
-
-export const useEmpresaStore = create<EmpresaState>((set) => ({
+export const useEmpresaStore = create((set) => ({
+    dataEmpresa: [],
+    mostrarEmpresa: async (p: any) => {
+        const response = await MostrarEmpresaXidusuario()
+        set({ dataEmpresa: response})
+        return response;
+    },
     insertarEmpresa: async (p: any, f: File | null) => {
         const response = await InsertarEmpresa(p, f)
         if (response) {
@@ -15,4 +17,3 @@ export const useEmpresaStore = create<EmpresaState>((set) => ({
         return false;
     }
 }))
-

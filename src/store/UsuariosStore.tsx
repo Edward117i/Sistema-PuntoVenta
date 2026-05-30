@@ -1,16 +1,13 @@
 import { create } from "zustand"
-import { MostrarModulos } from "../index"
+import { MostrarUsuarios, ObtenerIdAuthSupabse } from "../index"
 
-interface ModuloState {
-    dataModulos: any[];
-    mostrarModulos: () => Promise<any>;
-}
 
-export const useModuloStore = create<ModuloState>((set) => ({
-    dataModulos: [],
-    mostrarModulos: async () => {
-        const response = await MostrarModulos();
-        set({ dataModulos: response ?? [] });
+export const useUsuariosStore = create((set) => ({
+    dataUsuarios: [],
+    mostrarUsuarios: async () => {
+        const idauth = await ObtenerIdAuthSupabse();
+        const response = await MostrarUsuarios({idauth: idauth});
+        set({ dataUsuarios: response });
         return response;
     }
 }));
